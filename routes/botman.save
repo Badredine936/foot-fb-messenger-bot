@@ -1,0 +1,75 @@
+<?php
+use App\Http\Controllers\BotManController;
+use BotMan\Drivers\Facebook\Extensions\ButtonTemplate;
+use BotMan\Drivers\Facebook\Extensions\ElementButton;
+
+$botman = resolve('botman');
+
+$botman->hears('Start conversation', BotManController::class.'@startConversation');
+$botman->hears('Démarrer', function ($bot) {
+    $bot->reply("Bonjour pour consulter les résultats d'une équipe, vous devez écrire le mot matchs suivi du nom de votre équipe ! 
+    \n Exemple: matchs paris sg
+    \n\n Vous pouvez utiliser le menu ou écrire le mot 'equipes' pour consulter la liste des équipes disponible ! 
+    ");
+});
+
+
+$botman->hears('coucou', function ($bot) {
+//    $data = json_decode(file_get_contents('../storage/app/public/matchs.json'), true);
+//    $reply = ButtonTemplate::create('Do you want to know more about BotMan?');
+//    foreach($data['byTeam'] as $equipe => $matches) {
+//        $reply->addButton(ElementButton::create('matchs ' . $equipe)->type('postback')->payload('matchs ' . $equipe));
+//    }
+//    $bot->reply($reply);
+    $bot->reply(ButtonTemplate::create('Do you want to know more about BotMan?')
+        ->addButton(ElementButton::create('Tell me more')->type('postback')->payload('tellmemore'))
+        ->addButton(ElementButton::create('Show me the docs')->url('http://botman.io/'))
+    );
+});
+$botman->hears('equipes', function ($bot) {
+
+    $data = json_decode(file_get_contents('../storage/app/public/matchs.json'), true);
+
+
+    $text = 'Liste des equipes de ligue 1 : ';
+    foreach($data['byTeam'] as $equipe => $matches) {
+        $text .= "\n$equipe";
+    }
+    $bot->reply($text);
+
+
+});
+
+$botman->hears('matchs {equipe}', function ($bot, $equipe) {
+
+    $data = json_decode(file_get_contents('../storage/app/public/matchs.json'), true);
+
+
+    if(!isset($data['byTeam'][strtolower($equipe)])) {
+        $bot->reply("l'equipe <$equipe>  n'existe pas... taper equipes pour voir la liste des équipes disponible !");
+    } else  {
+
+        $text = 'Liste des matchs pour '.$equipe;
+        $count = 0;
+        foreach($data['byTeam'][strtolower($equipe)] as $match) {
+           $date = new DateTime($match['date']);
+           $text .= date_format($date, 'd/m/Y') . ' : ' . "\n" .$match['eq1'].' '.$match['score1'].' - '.$match['score2'].' '.$match['eq2'] . "\n\n";
+           $count++;
+
+
+//           if($count > 50) {
+//               $bot->reply($text);
+//               $text = '';
+//               $count = 0;
+//           }
+
+        }
+
+        if($text) {
+            $bot->reply($text);
+        }
+    }
+
+
+
+});
