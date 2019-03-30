@@ -42,7 +42,7 @@ class MatchsConversation extends Conversation
             }
             $this->say($text);
           }else{
-            $this->say("Je n'ai pas compris votre réponse !");
+            $this->say("Je n'ai pas compris votre réponse ! Veuillez utiliser le menu ou taper une commande connue !");
           }
         });
     }
