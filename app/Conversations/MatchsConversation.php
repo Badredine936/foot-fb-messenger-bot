@@ -48,20 +48,20 @@ class MatchsConversation extends Conversation
     }
 
 
-//	/**
-//	 * Texte stop pour mettre fin à la conversation conversation
-//	 * @param \BotMan\BotMan\Messages\Incoming\IncomingMessage $message
-//	 *
-//	 * @return bool
-//	 */
-//		public function stopsConversation(IncomingMessage $message)
-//		{
-//			if ($message->getText() == 'stop') {
-//				return true;
-//			}
-//
-//			return false;
-//		}
+	/**
+	 * Texte stop pour mettre fin à la conversation conversation
+	 * @param \BotMan\BotMan\Messages\Incoming\IncomingMessage $message
+	 *
+	 * @return bool
+	 */
+		public function stopsConversation(IncomingMessage $message)
+		{
+			if ($message->getText() == 'stop') {
+				return true;
+			}
+
+			return false;
+		}
 
     /**
      * Start the conversation
