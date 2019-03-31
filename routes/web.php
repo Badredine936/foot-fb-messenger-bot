@@ -26,11 +26,6 @@ Route::match(['get', 'post'], '/botman', 'BotManController@handle');
 
 Route::get('/botman/tinker', 'BotManController@tinker');
 
-Route::get('/generate_results', 'BotManController@generateResults');
-
-Route::get('/generate_standing', 'BotManController@generateStanding');
-
-
 Route::get('/clear-cache', function() {
 	Artisan::call('cache:clear');
 	return "Cache is cleared";

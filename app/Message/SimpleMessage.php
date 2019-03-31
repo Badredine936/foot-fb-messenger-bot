@@ -57,9 +57,7 @@ class SimpleMessage  extends Controller {
 	 * @param $bot
 	 */
 	public function start($bot){
-		$bot->reply("Bonjour " . $bot->getUser()->getFirstName() . " pour consulter les résultats d'une équipe, vous devez écrire le mot matchs suivi du nom de votre équipe !
-    \n Exemple: matchs Paris Saint-Germain
-    \n\n Vous pouvez également consulter le menu ou écrire le mot 'equipes' pour obtenir la liste des équipes disponible !
+		$bot->reply("Bonjour " . $bot->getUser()->getFirstName() . " pour consulter les résultats d'une équipe, vous devez écrire le mot matchs suivi du nom de votre équipe !\nExemple: matchs Paris Saint-Germain\n\nVous pouvez également consulter le menu ou écrire le mot 'equipes' pour obtenir la liste des équipes disponible !
     ");
 	}
 
@@ -78,9 +76,7 @@ class SimpleMessage  extends Controller {
 	public function equipes($bot){
 		// récupératiion des données depuis l'api (voir App\Api\ApiFootball)
 		$data = App::make(ApiFootball::class)->getResultats();
-		$text = "Vous pouvez écrire 'matchs' suivi du nom de l'équipe pour voir les resultats d'une équipes.\n
-		Exemple : matchs Lille \n\n
-		Voici la liste des equipes de ligue 1 : ";
+		$text = "Vous pouvez écrire 'matchs' suivi du nom de l'équipe pour voir les resultats d'une équipes.\n\nExemple : matchs Lille\n\nVoici la liste des equipes de ligue 1 : ";
 		foreach($data['byTeam'] as $equipe => $matches) {
 			$text .= "\n" . ucwords($equipe, " \t\r\n\f\v-");
 		}
@@ -112,11 +108,11 @@ class SimpleMessage  extends Controller {
 		$bot->reply(ListTemplate::create()
 			->useCompactView()
 			->addGlobalButton(ElementButton::create('view more')
-				->url('http://niooz.fr')
+				->url('http://google.fr')
 			)
 			->addElement(Element::create('BotMan Documentation')
 				->subtitle('All about BotMan')
-				//->image('http://botman.io/img/botman-body.png')
+				->image('https://lehubdutemps.com/wp-content/uploads/2018/11/mini_monkey-d-luffy-comment-etre-optimiste.jpg')
 				->addButton(ElementButton::create('tell me more')
 					->payload('tellmemore')
 					->type('postback')
@@ -124,7 +120,7 @@ class SimpleMessage  extends Controller {
 			)
 			->addElement(Element::create('BotMan Laravel Starter')
 				->subtitle('This is the best way to start with Laravel and BotMan')
-				//->image('http://botman.io/img/botman-body.png')
+				->image('https://lehubdutemps.com/wp-content/uploads/2018/11/mini_monkey-d-luffy-comment-etre-optimiste.jpg')
 				->addButton(ElementButton::create('visit')
 					->url('https://github.com/mpociot/botman-laravel-starter')
 				)
