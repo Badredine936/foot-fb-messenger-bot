@@ -57,7 +57,8 @@ class SimpleMessage  extends Controller {
 	 * @param $bot
 	 */
 	public function start($bot){
-		$bot->reply("Bonjour " . $bot->getUser()->getFirstName() . " pour consulter les résultats d'une équipe, vous devez écrire le mot matchs suivi du nom de votre équipe !\nExemple: matchs Paris Saint-Germain\n\nVous pouvez également consulter le menu ou écrire le mot 'equipes' pour obtenir la liste des équipes disponible !
+	    $username = ($bot->getUser()->getFirstName()) ? $bot->getUser()->getFirstName() . " " : "";
+		$bot->reply("Bonjour " . $username . "pour consulter les résultats d'une équipe, vous devez écrire le mot matchs suivi du nom de votre équipe !\nExemple: matchs Paris Saint-Germain\n\nVous pouvez également consulter le menu ou écrire le mot 'equipes' pour obtenir la liste des équipes disponible !
     ");
 	}
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\BotManController;
 $botman = resolve('botman');
 
 //Réponse au clic sur le bouton démarrer du Facebook messenger
-$botman->hears('Démarrer', SimpleMessage::class.'@start');
+$botman->hears('Bonjour|Salut|Démarrer', SimpleMessage::class.'@start');
 
 //Récupération des différents résultats de ligue 1
 $botman->hears('classement', SimpleMessage::class.'@classement');
