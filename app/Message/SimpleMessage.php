@@ -77,7 +77,7 @@ class SimpleMessage  extends Controller {
 	public function equipes($bot){
 		// récupératiion des données depuis l'api (voir App\Api\ApiFootball)
 		$data = App::make(ApiFootball::class)->getResultats();
-		$text = "Vous pouvez écrire 'matchs' suivi du nom de l'équipe pour voir les resultats d'une équipes.\n\nExemple : matchs Lille\n\nVoici la liste des equipes de ligue 1 : ";
+		$text = "Vous pouvez écrire 'matchs' suivi du nom de l'équipe pour voir les resultats d'une équipe.\n\nExemple : matchs Lille\n\nVoici la liste des equipes de ligue 1 : ";
 		foreach($data['byTeam'] as $equipe => $matches) {
 			$text .= "\n" . ucwords($equipe, " \t\r\n\f\v-");
 		}

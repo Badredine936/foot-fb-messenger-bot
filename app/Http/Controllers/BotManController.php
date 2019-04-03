@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use BotMan\BotMan\BotMan;
-use Illuminate\Http\Request;
 use App\Conversations\MatchsConversation;
-use Illuminate\Support\Facades\Log;
+
 
 class BotManController extends Controller
 {
+
+    public function __construct() {
+
+    }
     /**
      * Place your BotMan logic here.
      */
     public function handle()
     {
+	    \Debugbar::disable();
         $botman = app('botman');
 
         $botman->listen();
